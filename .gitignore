@@ -10,7 +10,6 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -61,10 +60,6 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-# Flask stuff:
-Code/backend/static
-Code/backend/instance/
-Code/backend/.webassets-cache
 
 # Scrapy stuff:
 .scrapy
