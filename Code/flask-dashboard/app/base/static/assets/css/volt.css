@@ -43831,16 +43831,5 @@ article .h1, article .h2, article .h3, article .h4, article .h5, article .h6 {
 .fc-daygrid-day-number {
     font-weight: 600;
 }
-div, iframe {
-    width: 100px;
-    height: 50px;
-    margin: 0 auto;
-    background-color: #777;
-} 
-
-iframe {
-    display: block;
-    border-style:none;
-}
 
 /*# sourceMappingURL=volt.css.map */
