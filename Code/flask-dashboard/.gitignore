@@ -29,3 +29,5 @@ package-lock.json
 
 # static data
 /app/base/static/data
+
+app/base/static/assets/videos/*
