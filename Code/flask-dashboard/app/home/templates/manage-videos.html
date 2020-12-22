@@ -1,0 +1,130 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Visitor Screen {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid bg-soft">
+
+        <div class="preloader bg-soft flex-column justify-content-center align-items-center">
+            <img class="loader-element animate__animated animate__jackInTheBox" src="/static/assets/img/brand/light.svg"
+                 height="60" alt="Volt logo">
+        </div>
+
+        <div class="row justify-content-md-center mt-4">
+            <div class="col-12">
+                <div class="card bg-yellow-alt shadow-sm">
+
+                    <div class="row">
+                        <div class="card-header d-flex flex-row justify-content-center">
+                            <div class="col-4 mt-2 mb-2">
+                                <img src="/static/assets/img/Logo-Argus.png"
+                                     height="100" alt="Argus logo">
+                            </div>
+                            <div class="col-8">
+                                <div class="d-block align text-left">
+                                    <div class="h3 font-weight-normal mb-2">Live Stream from the enclosure</div>
+                                    <h2 class="h1 font-weight-bolder">Bat-Eared Foxes</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8" id="all-videos">
+                            </div>
+
+                            <div class="col-4">
+
+                                 <div class="row text-center mt-2 mb-2">
+                                    <div class="d-block align text-center">
+                                        <div class="h5 font-weight-bolder mb-2">Current room climate of the enclosure</div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2 mt-2">
+
+                                    <div class="col-6">
+                                        <div class="card border-light shadow-sm">
+                                            <div class="card-body">
+                                                <div class="row d-block d-xl-flex align-items-center">
+                                                    <div class="col-12 col-xl-7 px-xl-0">
+                                                        <div class="d-none d-sm-block">
+                                                            <h2 class="h5">aaa</h2>
+                                                            <h3 id="aaa" class="mb-1"></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row text-center mt-2 mb-2">
+                                    <div class="d-block align text-center">
+                                        <h2 class="h1 font-weight-bolder">Highlights</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% include 'includes/footer.html' %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    loadSensorData();
+    loadVideos();
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setInterval("loadSensorData()", 5000); // call every 10 seconds
+    })
+
+    function loadSensorData() {
+        $("#humidity").load("/get-humidity");
+        $("#temperature").load("/get-temperature");
+    }
+
+    function loadVideos() {
+        videos = $.getJSON("/get-videos", function(data){
+            data.videos.forEach(video => {
+                $("#aaa").append(
+                    $("div").addClass("p-2").html(
+                        `<video id='${video.name}' class='video-js vjs-default-skin' src='file://${video.path}' type='video/mp4' /></video>`
+                    ))
+            });
+        });
+        
+            // .done(function( data ) {
+            //     $.each( data.items, function( i, item ) {
+            //         console.log(item);
+            //         // $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+            //         // if ( i === 3 ) {
+            //         // return false;
+            //     });
+            // });
+
+        // $('#all-videos').append()
+        //     <div class="p-2">
+        //         <video id="example_video_1" class="video-js vjs-default-skin" width="640" height="264" src="file:///C:/Users/rpimentel/Desktop/converts/demo1.mp4" type='video/mp4' />
+        //         </video>
+        //     </div>
+
+        // $("#aaa").load("/get-videos");
+    }
+</script>
+{% endblock javascripts %}
+
+
